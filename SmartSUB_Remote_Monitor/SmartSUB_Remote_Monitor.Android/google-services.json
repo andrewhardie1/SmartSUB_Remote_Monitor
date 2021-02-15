@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "204115824088",
+    "project_id": "smartsub-alarmnotification",
+    "storage_bucket": "smartsub-alarmnotification.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:204115824088:android:d455c0d157085732d376ad",
+        "android_client_info": {
+          "package_name": "com.smartsub.xamarinfcmapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "204115824088-gj0cikdurd1tjc1ve9ilmqn6f83e8ddo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNeutj9eb_ZUs3tDhyrXtks5XwdNgr05M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "204115824088-gj0cikdurd1tjc1ve9ilmqn6f83e8ddo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartSUB_Remote_Monitor.ActiveAlarms">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="Start" RowSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20" />
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Margin="10,0,0,0" Text="NodeID" />
+                <Label Grid.Column="1" Margin="40,0,0,0" Text="Alarm" />
+                <Label Grid.Column="2" Text="Date (UTC)"/>
+            </Grid>
+            <ListView x:Name="alarmListView" HasUnevenRows="true" HeightRequest="200" SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Grid Margin="0" Padding="0" RowSpacing="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60" />
+                                        <ColumnDefinition Width="150" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Margin="20,0,0,0" Text="{Binding NodeID}"/>
+                                    <Label Grid.Column="1" Margin="20,0,0,0" Text="{Binding NodeName}"/>
+                                    <Label Grid.Column="2" Margin="0" Text="{Binding E_Date}" />
+                                </Grid>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label x:Name="notificationLabel"
+                   HorizontalOptions="Center"
+                   TextTransform="Uppercase"
+                   FontSize="Large"
+                   Padding="0,0,0,0"
+                   TextColor="Red"
+                   Text="{Binding Message, Mode=TwoWay}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

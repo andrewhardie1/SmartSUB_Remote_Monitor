@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SmartSUB_Remote_Monitor.SettingsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Settings">
+    <ContentPage.Content>
+        <StackLayout x:Name="SettingsStack">
+            <Label Text="Enable Data Auto Sync:"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   VerticalOptions="Start" 
+                   HorizontalOptions="CenterAndExpand"
+                   TranslationY="30"/>
+            <RadioButton Content="Enable"
+                         x:Name="EnableButton"
+                         IsChecked="{Binding IsCheckedTrue, Mode=TwoWay}"
+                         FontSize="20"
+                         VerticalOptions="Center"
+                         HorizontalOptions="Center"
+                         TranslationY="30"
+                         TranslationX="-33"
+                         CheckedChanged="RadioButton_CheckedChanged"
+                         Value="Enabled"
+                         BindingContext="{Binding IsCheckedTrue, Mode=TwoWay}"/>
+            <RadioButton Content="Disable"
+                         x:Name="DisableButton"
+                         IsChecked="{Binding IsCheckedFalse, Mode=TwoWay}"
+                         FontSize="20"
+                         VerticalOptions="Center"
+                         HorizontalOptions="Center"
+                         TranslationY="25"
+                         TranslationX="-30"
+                         CheckedChanged="RadioButton_CheckedChanged"
+                         Value="Disabled"
+                         BindingContext="{Binding IsCheckedFalse, Mode=TwoWay}"/>
+            <Label Text="SmartSUB Server URL:"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   VerticalOptions="Start" 
+                   HorizontalOptions="CenterAndExpand"
+                   TranslationY="50"/>
+            <Entry x:Name="ConnectionEntry"
+                   Placeholder="Please enter IP"
+                   Margin="100,40,100,0"
+                   Keyboard="Telephone"
+                   BindingContext="{Binding SmartSUBServerURL, Mode=TwoWay}"/>
+            <Button x:Name="ApplyButton"
+                TranslationY="0"
+                Margin="80,0"
+                Text="Apply"
+                BackgroundColor="#4da6ff"
+                TextColor="White"
+                Clicked="ApplyButton_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

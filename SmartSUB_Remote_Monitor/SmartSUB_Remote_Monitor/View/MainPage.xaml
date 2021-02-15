@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartSUB_Remote_Monitor.MainPage"
+             Title="                   SmartSUB Mobile">
+
+    <StackLayout x:Name="containerStackLayout"
+                 VerticalOptions="Center"
+                 Margin="20,0">
+        <Label x:Name="ConnectionLabel" Text="{Binding ConnectionStatus, Mode=TwoWay}"/>
+        <Entry x:Name="HostnameEntry"
+               Placeholder="Host Name/IP Address"
+               Keyboard="Telephone"
+               Margin="50,0"
+               Text="{Binding HostName, Mode=TwoWay}"/>
+        <Entry x:Name="PortEntry"
+               Placeholder="TCP Port"
+               Keyboard="Telephone"
+               Margin="50,0"
+               Text="{Binding PortNumber, Mode=TwoWay}"/>
+        <Entry x:Name="UserNameEntry"
+               Placeholder="User Name"
+               Margin="50,0"/>
+        <Entry x:Name="PasswordEntry"
+               Placeholder="Password"
+               IsPassword="True"
+               Margin="50,0"/>
+        <Picker x:Name="GroupIDPicker"
+                Title="Group"
+                ItemsSource="{Binding GroupIDs}"
+                SelectedItem="{Binding SelectedGroup}"
+                Margin="50,0"/>
+        <Button x:Name="LoginButton"
+                Margin="50,0"
+                Text="Login"
+                BackgroundColor="#4da6ff"
+                TextColor="White"
+                Clicked="LoginButton_Clicked"
+                IsEnabled="{Binding IsAuthenticationRequired}"/>
+    </StackLayout>
+
+</ContentPage>

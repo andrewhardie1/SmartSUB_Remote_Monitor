@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartSUB_Remote_Monitor.AccountPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label x:Name="userLabel"
+                   HorizontalOptions="CenterAndExpand"
+                   TranslationY="320"/>
+            <Button x:Name="LogoutButton"
+                TranslationY="300"
+                Margin="50,50,50,50"
+                Text="Logout User"
+                BackgroundColor="#4da6ff"
+                TextColor="White"
+                Clicked="LogoutButton_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

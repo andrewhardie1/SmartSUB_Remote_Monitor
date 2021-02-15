@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SmartSUB_Remote_Monitor"
+             x:Class="SmartSUB_Remote_Monitor.HomePage"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom" >
+    <TabbedPage.Title>SmartSUB</TabbedPage.Title>
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem Text="Get Data"
+                     Clicked="ToolbarItem_Clicked"
+                     IconImageSource="ic_action_sync.png"/>
+        <ToolbarItem x:Name="Settings"
+                     Text="Settings"
+                     Clicked="Settings_Clicked"
+                     IconImageSource="ic_action_settings.png"/>
+        <ToolbarItem x:Name="UserAccount"
+                     Clicked="UserAccount_Clicked"/>
+    </TabbedPage.ToolbarItems>
+    <local:ActiveAlarms Title="Active Alarms"
+                        IconImageSource="ic_action_warning.png"/>
+    <local:History Title="History Alarms"
+                   IconImageSource="ic_action_history.png"/>
+</TabbedPage>
