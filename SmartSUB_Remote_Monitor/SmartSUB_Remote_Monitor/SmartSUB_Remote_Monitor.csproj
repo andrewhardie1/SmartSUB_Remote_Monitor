@@ -61,16 +61,16 @@
 
   <ItemGroup>
     <Reference Include="Dms.Cms.DatabaseManager">
-      <HintPath>D:\Development\Example Projects\SSE\CMS_SystemModel\Dms.Cms.SessionHandler\bin\Debug\Dms.Cms.DatabaseManager.dll</HintPath>
+      <HintPath>..\..\Dms.Cms Libraries\Dms.Cms.DatabaseManager.dll</HintPath>
     </Reference>
     <Reference Include="Dms.Cms.Messaging">
-      <HintPath>D:\Development\Example Projects\SSE\SharedUtils\Dms.Cms.Messaging\bin\Debug\Dms.Cms.Messaging.dll</HintPath>
+      <HintPath>..\..\Dms.Cms Libraries\Dms.Cms.Messaging.dll</HintPath>
     </Reference>
     <Reference Include="Dms.Cms.SessionHandler">
-      <HintPath>D:\Development\Example Projects\SSE\CMS_SystemModel\Dms.Cms.SessionHandler\bin\Debug\Dms.Cms.SessionHandler.dll</HintPath>
+      <HintPath>..\..\Dms.Cms Libraries\Dms.Cms.SessionHandler.dll</HintPath>
     </Reference>
     <Reference Include="Dms.Cms.SystemModel">
-      <HintPath>D:\Development\Example Projects\SSE\CMS_SystemModel\Dms.Cms.SessionHandler\bin\Debug\Dms.Cms.SystemModel.dll</HintPath>
+      <HintPath>..\..\Dms.Cms Libraries\Dms.Cms.SystemModel.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>
