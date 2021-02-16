@@ -41,7 +41,7 @@ namespace SmartSUB_Remote_Monitor.ViewModel
 
         public StationViewModel(SystemInterface systemInterface)
         {
-            Stations = new Stations().GetStations(systemInterface);
+             Stations = new Stations().GetStations(systemInterface);
         }
 
         public void AttachSubscriptions(SystemInterface systemInterface)
