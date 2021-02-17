@@ -17,7 +17,7 @@
                 <Label Grid.Column="1" Margin="40,0,0,0" Text="Alarm" />
                 <Label Grid.Column="2" Text="Date (UTC)"/>
             </Grid>
-            <ListView x:Name="alarmListView" HasUnevenRows="true" HeightRequest="200" SeparatorVisibility="None">
+            <ListView x:Name="alarmListView" ItemsSource="{Binding ActiveAlarms, Mode=TwoWay}" HasUnevenRows="true" HeightRequest="200" SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -30,7 +30,7 @@
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Column="0" Margin="20,0,0,0" Text="{Binding NodeID}"/>
                                     <Label Grid.Column="1" Margin="20,0,0,0" Text="{Binding NodeName}"/>
-                                    <Label Grid.Column="2" Margin="0" Text="{Binding E_Date}" />
+                                    <Label Grid.Column="2" Margin="0" Text="{Binding Timestamp}" />
                                 </Grid>
                             </ViewCell.View>
                         </ViewCell>

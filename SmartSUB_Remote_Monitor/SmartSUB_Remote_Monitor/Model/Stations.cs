@@ -1,6 +1,6 @@
 ﻿using Dms.Cms.DatabaseManager;
+using Dms.Cms.Messaging;
 using Dms.Cms.SystemModel;
-using SQLite;
 using System;
 using System.Collections.Generic;
 
@@ -52,15 +52,23 @@ namespace SmartSUB_Remote_Monitor.Model
 
             if (response == QueryResult.Valid)
             {
-                var enumerator = expected.GetEnumerator();
+                var alarm = expected.GetEnumerator();
 
-                while (enumerator.MoveNext())
+                while (alarm.MoveNext())
                 {
-                    count++;
+                    var nodeDefinition = systemInterface.SystemInfo.NodeFromID(alarm.Current.NodeID);
+                    NodeType nodeType = nodeDefinition.Type;
 
-                    if (latestActiveAlarm < enumerator.Current.TimeStamp)
+                    if (nodeType.ID != Symbol.Intern("CompanyType")
+                            && nodeType.ID != Symbol.Intern("RegionType")
+                            && nodeType.ID != Symbol.Intern("SubstationType"))
                     {
-                        latestActiveAlarm = enumerator.Current.TimeStamp;
+                        count++;
+
+                        if (latestActiveAlarm < alarm.Current.TimeStamp)
+                        {
+                            latestActiveAlarm = alarm.Current.TimeStamp;
+                        }
                     }
                 }
 

@@ -36,6 +36,9 @@
     <Compile Update="View\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
     </Compile>
+    <Compile Update="View\HistoryAlarms.xaml.cs">
+      <DependentUpon>HistoryAlarms.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -45,7 +48,7 @@
     <EmbeddedResource Update="View\ActiveAlarms.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="View\History.xaml">
+    <EmbeddedResource Update="View\HistoryAlarms.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\HomePage.xaml">

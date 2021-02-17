@@ -1,14 +1,16 @@
-﻿using SmartSUB_Remote_Monitor.Model;
+﻿using Dms.Cms.SystemModel;
+using SmartSUB_Remote_Monitor.Model;
 using SmartSUB_Remote_Monitor.Services;
+using SmartSUB_Remote_Monitor.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace SmartSUB_Remote_Monitor
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class History : ContentPage
+    public partial class HistoryAlarms : ContentPage
     {
-        public History()
+        public HistoryAlarms(SystemInterface systemInterface)
         {
             InitializeComponent();
 
@@ -20,6 +22,10 @@ namespace SmartSUB_Remote_Monitor
 
             ServiceContainer.Resolve<ISmartSUBNotificationActionService>()
                 .ActionTriggered += NotificationActionTriggered;
+
+            HistoryAlarmsViewModel vm = new HistoryAlarmsViewModel(systemInterface);
+
+            BindingContext = vm;
 
         }
 
@@ -33,10 +39,10 @@ namespace SmartSUB_Remote_Monitor
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();
+            //base.OnAppearing();
 
-            var alarms = AlarmData.ReadInctiveAlarms(App.stationSelected);
-            postListView.ItemsSource = alarms;
+            //var alarms = AlarmData.ReadInctiveAlarms(App.stationSelected);
+            //postListView.ItemsSource = alarms;
         }
     }
 }

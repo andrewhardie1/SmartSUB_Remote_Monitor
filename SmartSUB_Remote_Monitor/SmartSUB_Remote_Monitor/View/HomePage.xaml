@@ -17,8 +17,4 @@
         <ToolbarItem x:Name="UserAccount"
                      Clicked="UserAccount_Clicked"/>
     </TabbedPage.ToolbarItems>
-    <local:ActiveAlarms Title="Active Alarms"
-                        IconImageSource="ic_action_warning.png"/>
-    <local:History Title="History Alarms"
-                   IconImageSource="ic_action_history.png"/>
 </TabbedPage>

@@ -1,6 +1,8 @@
-﻿using Microsoft.Identity.Client;
+﻿using Dms.Cms.SystemModel;
+using Microsoft.Identity.Client;
 using SmartSUB_Remote_Monitor.Model;
 using SmartSUB_Remote_Monitor.Services;
+using SmartSUB_Remote_Monitor.ViewModel;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -17,7 +19,7 @@ namespace SmartSUB_Remote_Monitor
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ActiveAlarms : ContentPage
     {
-        public ActiveAlarms()
+        public ActiveAlarms(SystemInterface systemInterface)
         {
             InitializeComponent();
 
@@ -27,6 +29,10 @@ namespace SmartSUB_Remote_Monitor
 
             ServiceContainer.Resolve<ISmartSUBNotificationActionService>()
                 .ActionTriggered += NotificationActionTriggered;
+
+            ActiveAlarmsViewModel vm = new ActiveAlarmsViewModel(systemInterface);
+
+            BindingContext = vm;
         }
 
         async void NotificationActionTriggered(object sender, PushNotificationAction e)
@@ -58,10 +64,10 @@ namespace SmartSUB_Remote_Monitor
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();
+            //base.OnAppearing();
 
-            var alarms = AlarmData.ReadActiveAlarms(App.stationSelected);
-            alarmListView.ItemsSource = alarms;
+            //var alarms = AlarmData.ReadActiveAlarms(App.stationSelected);
+            //alarmListView.ItemsSource = alarms;
             
         }
     }

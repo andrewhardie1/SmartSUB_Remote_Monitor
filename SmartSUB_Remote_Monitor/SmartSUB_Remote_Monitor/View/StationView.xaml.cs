@@ -16,6 +16,7 @@ namespace SmartSUB_Remote_Monitor.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class StationView : ContentPage
     {
+        SystemInterface _systemInterface;
         public StationView(SystemInterface systemInterface)
         {
             InitializeComponent();
@@ -26,7 +27,7 @@ namespace SmartSUB_Remote_Monitor.View
 
             BindingContext = vm;
 
-            vm.AttachSubscriptions(systemInterface);
+            _systemInterface = systemInterface;
         }
 
         private void OnTapEventAsync(object sender, ItemTappedEventArgs e)
@@ -36,7 +37,7 @@ namespace SmartSUB_Remote_Monitor.View
             string result = selectedItem.StationID.Substring(selectedItem.StationID.Length - 1, 1);
             int stationSelected = Convert.ToInt32(result);
             App.stationSelected = stationSelected;
-            Navigation.PushAsync(new HomePage());
+            Navigation.PushAsync(new HomePage(_systemInterface));
         }
 
         private async void ToolbarItem_Clicked(object sender, EventArgs e)
