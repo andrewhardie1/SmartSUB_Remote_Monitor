@@ -2,6 +2,7 @@
 using Dms.Cms.SystemModel;
 using Microsoft.Identity.Client;
 using SmartSUB_Remote_Monitor.Model;
+using SmartSUB_Remote_Monitor.View;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,10 +11,11 @@ namespace SmartSUB_Remote_Monitor
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : TabbedPage
     {
+        SystemInterface _systemInterface;
         public HomePage(SystemInterface systemInterface)
         {
             InitializeComponent();
-
+            _systemInterface = systemInterface;
             this.Children.Add(new ActiveAlarms(systemInterface) { IconImageSource= "ic_action_warning.png", Title= "Active Alarms" });
             this.Children.Add(new HistoryAlarms(systemInterface) { IconImageSource = "ic_action_history.png", Title = "History Alarms" });
         }
@@ -38,7 +40,7 @@ namespace SmartSUB_Remote_Monitor
 
         private void Settings_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new SettingsPage());
+            Navigation.PushAsync(new SystemLogView(_systemInterface));
         }
 
         protected override void OnAppearing()

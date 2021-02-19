@@ -60,7 +60,7 @@ namespace SmartSUB_Remote_Monitor.View
 
         private void Settings_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new SettingsPage());
+            Navigation.PushAsync(new SystemLogView(_systemInterface));
         }
 
         protected override void OnAppearing()
