@@ -13,35 +13,15 @@ namespace SmartSUB_Remote_Monitor.Model
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private string givenName;
-        public string GivenName
+        private string userRole;
+        public string UserRole
         {
-            get { return givenName; }
+            get { return userRole; }
             set
             {
-                givenName = value;
-                OnPropertyChanged("GivenName");
+                userRole = value;
+                OnPropertyChanged("UserRole");
             }
-        }
-
-        private string familyName;
-        public string FamilyName
-        {
-            get { return familyName; }
-            set
-            {
-                familyName = value;
-                OnPropertyChanged("FamilyName");
-            }
-        }
-
-        public static string GetUserInitials()
-        {
-            string firstNameInitial = "A";
-            string surnameInitial = "H";
-
-            string userInitials = firstNameInitial + surnameInitial;
-            return userInitials;
         }
 
         private void OnPropertyChanged(string propertyName)

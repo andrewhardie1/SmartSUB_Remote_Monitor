@@ -17,9 +17,9 @@ namespace SmartSUB_Remote_Monitor
         {
             base.OnAppearing();
 
-            if (App.user.GivenName != null && App.user.FamilyName != null)
+            if (App.user.UserRole != null)
             {
-                userLabel.Text = $"Logged in as: {App.user.GivenName} {App.user.FamilyName}";
+                userLabel.Text = $"Logged in as: {App.user.UserRole}";
             }
             else
             {
