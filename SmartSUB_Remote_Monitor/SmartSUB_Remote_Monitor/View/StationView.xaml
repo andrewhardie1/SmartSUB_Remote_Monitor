@@ -12,11 +12,11 @@
                      Clicked="Settings_Clicked"
                      IconImageSource="ic_action_settings.png"/>
         <ToolbarItem x:Name="UserAccount"
-                     Clicked="UserAccount_Clicked"/>
+                     Clicked="UserAccount_Clicked"
+                     IconImageSource="ic_action_account_circle.png"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Spacing="10" Padding="10">
-            <Label Text="{Binding Subscribed}"/>
             <ListView x:Name="listStations" ItemsSource="{Binding Stations, Mode=TwoWay}" HasUnevenRows="True" ItemTapped="OnTapEventAsync">
                 <ListView.ItemTemplate>
                     <DataTemplate>

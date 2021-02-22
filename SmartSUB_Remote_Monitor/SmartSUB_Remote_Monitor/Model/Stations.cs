@@ -3,19 +3,52 @@ using Dms.Cms.Messaging;
 using Dms.Cms.SystemModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 
 namespace SmartSUB_Remote_Monitor.Model
 {
-    public class Stations
+    public class Stations : INotifyPropertyChanged
     {
-        public string StationID { get; set; }
-        public string NumActiveAlarms { get; set; }
-        public string DateOfLatestAlarm { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
-        List<Stations> stations = new List<Stations>();
+        public string stationID { get; set; }
+        public string StationID
+        {
+            get { return stationID; }
+            set
+            {
+                stationID = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("StationID"));
+            }
+        }
 
-        public ref List<Stations> GetStations(SystemInterface systemInterface)
+        public string numActiveAlarms { get; set; }
+        public string NumActiveAlarms
+        {
+            get { return numActiveAlarms; }
+            set
+            {
+                numActiveAlarms = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("NumActiveAlarms"));
+            }
+        }
+
+        public string dateOfLatestAlarm { get; set; }
+        public string DateOfLatestAlarm
+        {
+            get { return dateOfLatestAlarm; }
+            set
+            {
+                dateOfLatestAlarm = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("DateOfLatestAlarm"));
+            }
+        }
+
+        ObservableCollection<Stations> stations = new ObservableCollection<Stations>();
+
+        public ref ObservableCollection<Stations> GetStations(SystemInterface systemInterface)
         {
             foreach (int station in GetDistinctStations(systemInterface))
             {
@@ -73,12 +106,24 @@ namespace SmartSUB_Remote_Monitor.Model
                     }
                 }
 
-                stations.Add(new Stations()
+                if (latestActiveAlarm == new DateTime(1970, 01, 01))
                 {
-                    StationID = "Station: " + stationID,
-                    NumActiveAlarms = "Active Alarms: " + count,
-                    DateOfLatestAlarm = "Latest Alarm Date: " + latestActiveAlarm
-                });
+                    stations.Add(new Stations()
+                    {
+                        StationID = "Station: " + stationID,
+                        NumActiveAlarms = "Active Alarms: " + count,
+                        DateOfLatestAlarm = "No Active Alarms Found."
+                    });
+                }
+                else
+                {
+                    stations.Add(new Stations()
+                    {
+                        StationID = "Station: " + stationID,
+                        NumActiveAlarms = "Active Alarms: " + count,
+                        DateOfLatestAlarm = "Latest Alarm Date: " + latestActiveAlarm
+                    });
+                }
             }
         }
     }

@@ -54,11 +54,5 @@ namespace SmartSUB_Remote_Monitor
             if (App.SmartSUBServerURL != null)
                 ConnectionEntry.Text = App.SmartSUBServerURL;
         }
-
-        private void ApplyButton_Clicked(object sender, EventArgs e)
-        {
-            App.SmartSUBServerURL = ConnectionEntry.Text;
-            DisplayAlert("Success", "URL Updated.", "OK");
-        }
     }
 }

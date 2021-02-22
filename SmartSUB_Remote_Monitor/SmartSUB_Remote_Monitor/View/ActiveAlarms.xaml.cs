@@ -19,9 +19,13 @@ namespace SmartSUB_Remote_Monitor
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ActiveAlarms : ContentPage
     {
-        public ActiveAlarms(SystemInterface systemInterface)
+        ActiveAlarmsViewModel viewModel;
+
+        public ActiveAlarms(SystemInterface systemInterface, HomePage homePage)
         {
             InitializeComponent();
+
+            homePage.GetDataButtonClickedEvent += HomePage_GetDataButtonClickedEvent;
 
             NotificationMessage.InsertOnStartup();
 
@@ -30,9 +34,26 @@ namespace SmartSUB_Remote_Monitor
             ServiceContainer.Resolve<ISmartSUBNotificationActionService>()
                 .ActionTriggered += NotificationActionTriggered;
 
-            ActiveAlarmsViewModel vm = new ActiveAlarmsViewModel(systemInterface);
+            viewModel = new ActiveAlarmsViewModel(systemInterface);
 
-            BindingContext = vm;
+            viewModel.GetActiveAlarms();
+
+            BindingContext = viewModel;
+            
+        }
+
+        private async void HomePage_GetDataButtonClickedEvent(object sender, EventArgs e)
+        {
+            bool result = viewModel.GetActiveAlarms();
+
+            if (result)
+            {
+                await DisplayAlert("Success", "Alarms have been updated", "OK");
+            }
+            else
+            {
+                await DisplayAlert("Failure", "An error occured. Please check IP is correct within Settings.", "OK");
+            }
         }
 
         async void NotificationActionTriggered(object sender, PushNotificationAction e)
@@ -43,32 +64,30 @@ namespace SmartSUB_Remote_Monitor
             {
                 await Task.Delay(TimeSpan.FromSeconds(5));
 
-                int success = AlarmData.GetAlarms();
+                bool result = viewModel.GetActiveAlarms();
 
-                await Device.InvokeOnMainThreadAsync(() =>
+                if (result)
                 {
-                    if (success == 1)
-                        this.DisplayAlert("Success", "Alarms added to database.", "OK");
-                    else if (success == 2)
-                        this.DisplayAlert("Failure", "No data was present within SQL Server.", "OK");
-                    else
-                        this.DisplayAlert("Failure", "Could not connect SQL server - please try again", "OK");
-                });
+                    await Device.InvokeOnMainThreadAsync(() =>
+                    {
+                        this.DisplayAlert("Success", "Alarms have been updated", "OK");
+                    });
+
+                    App.notificationMessage.Message = "";
+                }
+                else
+                {
+                    await Device.InvokeOnMainThreadAsync(() =>
+                    {
+                        this.DisplayAlert("Failure", "An error occured. Please check IP is correct within Settings.", "OK");
+                    });
+                }
             }
         }
 
         void DisplayAlert()
         {
             NotificationMessage.UpdateNotificationResponse(App.notificationMessage);  
-        }
-
-        protected override void OnAppearing()
-        {
-            //base.OnAppearing();
-
-            //var alarms = AlarmData.ReadActiveAlarms(App.stationSelected);
-            //alarmListView.ItemsSource = alarms;
-            
         }
     }
 }

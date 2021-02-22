@@ -17,15 +17,18 @@ namespace SmartSUB_Remote_Monitor.View
     public partial class StationView : ContentPage
     {
         SystemInterface _systemInterface;
+        StationViewModel viewModel;
         public StationView(SystemInterface systemInterface)
         {
             InitializeComponent();
 
             listStations.ItemTapped += OnTapEventAsync;
 
-            StationViewModel vm = new StationViewModel(systemInterface);
+            viewModel = new StationViewModel(systemInterface);
 
-            BindingContext = vm;
+            viewModel.GetStations();
+
+            BindingContext = viewModel;
 
             _systemInterface = systemInterface;
         }
@@ -42,31 +45,21 @@ namespace SmartSUB_Remote_Monitor.View
 
         private async void ToolbarItem_Clicked(object sender, EventArgs e)
         {
-            int success = AlarmData.GetAlarms();
-            if (success == 0)
-                await DisplayAlert("Failure", "SmartSUB connection URL cannot not be empty. Please update within Settings page.", "OK");
-            else if (success == 1)
-                await DisplayAlert("Success", "Alarms added to database.", "OK");
-            else if (success == 2)
-                await DisplayAlert("Failure", "No data was present within SQL Server.", "OK");
-            else if (success == 3)
-                await DisplayAlert("Failure", "An error occured. Please check IP is correct within Settings.", "OK");
+            bool result = viewModel.GetStations();
+
+            if (result)
+            {
+                await DisplayAlert("Success", "Alarms have been updated", "OK");
+            }
             else
             {
-                await DisplayAlert("Failure", "Could not connect SQL server - please try again", "OK");
+                await DisplayAlert("Failure", "An error occured. Please check IP is correct within Settings.", "OK");
             }
-
         }
 
         private void Settings_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new SystemLogView(_systemInterface));
-        }
-
-        protected override void OnAppearing()
-        {
-            string initials = Users.GetUserInitials();
-            UserAccount.Text = initials;
+            Navigation.PushAsync(new SettingsPage());
         }
 
         private void UserAccount_Clicked(object sender, EventArgs e)

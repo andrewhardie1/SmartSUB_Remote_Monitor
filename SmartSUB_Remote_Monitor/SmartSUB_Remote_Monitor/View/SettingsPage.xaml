@@ -34,24 +34,18 @@
                          CheckedChanged="RadioButton_CheckedChanged"
                          Value="Disabled"
                          BindingContext="{Binding IsCheckedFalse, Mode=TwoWay}"/>
-            <Label Text="SmartSUB Server URL:"
+            <Label Text="SmartSUB Server Address:"
                    FontSize="20"
                    FontAttributes="Bold"
                    VerticalOptions="Start" 
                    HorizontalOptions="CenterAndExpand"
                    TranslationY="50"/>
-            <Entry x:Name="ConnectionEntry"
-                   Placeholder="Please enter IP"
+            <Label x:Name="ConnectionEntry" 
+                   Text="192.168.1.137"
+                   FontSize="20"
+                   HorizontalOptions="CenterAndExpand"
                    Margin="100,40,100,0"
-                   Keyboard="Telephone"
                    BindingContext="{Binding SmartSUBServerURL, Mode=TwoWay}"/>
-            <Button x:Name="ApplyButton"
-                TranslationY="0"
-                Margin="80,0"
-                Text="Apply"
-                BackgroundColor="#4da6ff"
-                TextColor="White"
-                Clicked="ApplyButton_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

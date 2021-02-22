@@ -3,20 +3,64 @@ using Dms.Cms.Messaging;
 using Dms.Cms.SystemModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace SmartSUB_Remote_Monitor.Model
 {
-    class Alarms
+    class Alarms : INotifyPropertyChanged
     {
-        public string NodeID { get; set; }
-        public string NodeName { get; set; }
-        public string AlarmType { get; set; }
-        public DateTime Timestamp { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
-        List<Alarms> allActiveAlarms = new List<Alarms>();
-        List<Alarms> allHistoricAlarms = new List<Alarms>();
+        public string nodeID { get; set; }
+        public string NodeID
+        {
+            get { return nodeID; }
+            set
+            {
+                nodeID = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("NodeID"));
+            }
+        }
 
-        public ref List<Alarms> GetActiveAlarmsFromSmartSUB(SystemInterface systemInterface, ushort stationID)
+        public string nodeName { get; set; }
+        public string NodeName
+        {
+            get { return nodeName; }
+            set
+            {
+                nodeName = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("NodeName"));
+            }
+        }
+
+        public string alarmType { get; set; }
+        public string AlarmType
+        {
+            get { return alarmType; }
+            set
+            {
+                alarmType = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("AlarmType"));
+            }
+        }
+
+        public DateTime timestamp { get; set; }
+        public DateTime Timestamp
+        {
+            get { return timestamp; }
+            set
+            {
+                timestamp = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Timestamp"));
+            }
+        }
+
+        ObservableCollection<Alarms> allActiveAlarms = new ObservableCollection<Alarms>();
+
+        ObservableCollection<Alarms> allHistoricAlarms = new ObservableCollection<Alarms>();
+
+        public ref ObservableCollection<Alarms> GetActiveAlarmsFromSmartSUB(SystemInterface systemInterface, ushort stationID)
         {
             SiteID siteID = new SiteID(stationID);
             DatabaseManagerStub databaseManager = new DatabaseManagerStub(systemInterface);
@@ -73,7 +117,7 @@ namespace SmartSUB_Remote_Monitor.Model
             }
         }
 
-        public ref List<Alarms> GetHistoricAlarmsFromSmartSUB(SystemInterface systemInterface, ushort stationID)
+        public ref ObservableCollection<Alarms> GetHistoricAlarmsFromSmartSUB(SystemInterface systemInterface, ushort stationID)
         {
             SiteID siteID = new SiteID(stationID);
             DatabaseManagerStub databaseManager = new DatabaseManagerStub(systemInterface);

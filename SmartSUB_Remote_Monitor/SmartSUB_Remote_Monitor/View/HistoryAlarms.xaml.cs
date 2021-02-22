@@ -2,6 +2,8 @@
 using SmartSUB_Remote_Monitor.Model;
 using SmartSUB_Remote_Monitor.Services;
 using SmartSUB_Remote_Monitor.ViewModel;
+using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,9 +12,13 @@ namespace SmartSUB_Remote_Monitor
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HistoryAlarms : ContentPage
     {
-        public HistoryAlarms(SystemInterface systemInterface)
+        HistoryAlarmsViewModel viewModel;
+
+        public HistoryAlarms(SystemInterface systemInterface, HomePage homePage)
         {
             InitializeComponent();
+
+            homePage.GetDataButtonClickedEvent += HomePage_GetDataButtonClickedEvent;
 
             NotificationMessage.InsertOnStartup();
 
@@ -22,27 +28,44 @@ namespace SmartSUB_Remote_Monitor
 
             ServiceContainer.Resolve<ISmartSUBNotificationActionService>()
                 .ActionTriggered += NotificationActionTriggered;
+            
+            viewModel = new HistoryAlarmsViewModel(systemInterface);
 
-            HistoryAlarmsViewModel vm = new HistoryAlarmsViewModel(systemInterface);
+            viewModel.GetHistoricAlarms();
 
-            BindingContext = vm;
+            BindingContext = viewModel;
 
         }
 
-        void NotificationActionTriggered(object sender, PushNotificationAction e)
-    => DisplayAlert();
+        private async void HomePage_GetDataButtonClickedEvent(object sender, System.EventArgs e)
+        {
+            bool result = viewModel.GetHistoricAlarms();
+
+            if (result)
+            {
+                await DisplayAlert("Success", "Alarms have been updated", "OK");
+            }
+            else
+            {
+                await DisplayAlert("Failure", "An error occured. Please check IP is correct within Settings.", "OK");
+            }
+        }
+
+        async void NotificationActionTriggered(object sender, PushNotificationAction e)
+        {
+            DisplayAlert();
+
+            if (App.notificationMessage.AutoSync == "Enabled")
+            {
+                await Task.Delay(TimeSpan.FromSeconds(5));
+
+                viewModel.GetHistoricAlarms();
+            }
+        }
 
         void DisplayAlert()
         {
             NotificationMessage.UpdateNotificationResponse(App.notificationMessage);
-        }
-
-        protected override void OnAppearing()
-        {
-            //base.OnAppearing();
-
-            //var alarms = AlarmData.ReadInctiveAlarms(App.stationSelected);
-            //postListView.ItemsSource = alarms;
         }
     }
 }

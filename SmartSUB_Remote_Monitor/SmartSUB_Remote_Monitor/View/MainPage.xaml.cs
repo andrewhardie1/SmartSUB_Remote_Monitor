@@ -40,7 +40,7 @@ namespace SmartSUB_Remote_Monitor
                 "en-gb"))
             {
                 Model.SystemInterface = connectionManager.SystemInterface;
-
+                App.SmartSUBServerURL = this.HostnameEntry.Text;
                 await Navigation.PushAsync(new StationView(Model.SystemInterface));
             }
             else

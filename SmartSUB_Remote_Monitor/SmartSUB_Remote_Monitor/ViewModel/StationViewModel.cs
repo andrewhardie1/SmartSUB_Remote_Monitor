@@ -6,63 +6,49 @@ using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel;
 using System.Linq;
+using System.Collections.ObjectModel;
+using Xamarin.Forms;
 
 namespace SmartSUB_Remote_Monitor.ViewModel
 {
-    public class StationViewModel : INotifyPropertyChanged, INodeListener
+    class StationViewModel : INotifyPropertyChanged
     {
-        public List<Stations> Stations { get; set; }
-
-        private ISubscriptionHandler subscriptionHandler;
-        private List<NodeID> nodes = new List<NodeID>();
-
-        private string subscribed;
-        public string Subscribed
+        public event PropertyChangedEventHandler PropertyChanged;
+        private ObservableCollection<Stations> stations { get; set; }
+        public ObservableCollection<Stations> Stations
         {
-            get
-            {
-                return subscribed;
-            }
+            get { return stations; }
             set
             {
-                if (subscribed != value)
-                {
-                    subscribed = value;
-                    OnPropertyChanged("Subscribed");
-                }
+                stations = value;
+                OnPropertyChanged("Stations");
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        SystemInterface _systemInterface;
 
         public StationViewModel(SystemInterface systemInterface)
         {
-             Stations = new Stations().GetStations(systemInterface);
+            _systemInterface = systemInterface;
+             //Stations = new Stations().GetStations(systemInterface);
         }
 
-        public void AttachSubscriptions(SystemInterface systemInterface)
+        public bool GetStations()
         {
-            subscriptionHandler = systemInterface.SubscriptionHandler;
-            subscriptionHandler.AttachGlobalListener(this, SubscriptionKind.AlarmState);
+            try
+            {
+                Stations = new Stations().GetStations(_systemInterface);
+                return true;
+            }
+            catch 
+            {
+                return false;
+            }
         }
 
-        public void OnNodeStatusUpdate(NodeID nodeID, DateTime timestamp, NodeStatus nodeStatus)
+        private void OnPropertyChanged(string propertyName)
         {
-            throw new NotImplementedException();
-        }
-
-        public void OnPropertyUpdate(NodeID nodeID, DateTime timestamp, Message properties)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnAlarmUpdate(AlarmRecord alarmRecord)
-        {
-            //Do Nothing
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

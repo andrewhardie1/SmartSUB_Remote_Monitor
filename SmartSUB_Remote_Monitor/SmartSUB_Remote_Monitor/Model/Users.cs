@@ -44,7 +44,7 @@ namespace SmartSUB_Remote_Monitor.Model
             return userInitials;
         }
 
-            private void OnPropertyChanged(string propertyName)
+        private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

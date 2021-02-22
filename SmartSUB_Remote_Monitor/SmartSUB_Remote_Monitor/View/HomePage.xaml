@@ -7,7 +7,8 @@
             android:TabbedPage.ToolbarPlacement="Bottom" >
     <TabbedPage.Title>SmartSUB</TabbedPage.Title>
     <TabbedPage.ToolbarItems>
-        <ToolbarItem Text="Get Data"
+        <ToolbarItem x:Name="GetDataButton"
+                     Text="Get Data"
                      Clicked="ToolbarItem_Clicked"
                      IconImageSource="ic_action_sync.png"/>
         <ToolbarItem x:Name="Settings"
@@ -15,6 +16,7 @@
                      Clicked="Settings_Clicked"
                      IconImageSource="ic_action_settings.png"/>
         <ToolbarItem x:Name="UserAccount"
-                     Clicked="UserAccount_Clicked"/>
+                     Clicked="UserAccount_Clicked"
+                     IconImageSource="ic_action_account_circle.png"/>
     </TabbedPage.ToolbarItems>
 </TabbedPage>
