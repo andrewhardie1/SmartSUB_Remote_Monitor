@@ -9,6 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartSUB_Remote_Monitor.iOS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartSUB_Remote_Monitor", "SmartSUB_Remote_Monitor\SmartSUB_Remote_Monitor\SmartSUB_Remote_Monitor.csproj", "{D0E269B6-585B-4523-839A-39907FDB7FDF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartSUB_Remote_Monitor.UnitTests", "SmartSUB_Remote_Monitor.UnitTests\SmartSUB_Remote_Monitor.UnitTests.csproj", "{48FEEEE5-8E3C-4EAA-9588-CBCEDFA7A24B}"
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +74,18 @@ Global
 		{D0E269B6-585B-4523-839A-39907FDB7FDF}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{D0E269B6-585B-4523-839A-39907FDB7FDF}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{D0E269B6-585B-4523-839A-39907FDB7FDF}.Release|iPhoneSimulator.Deploy.0 = Release|Any CPU
+		{48FEEEE5-8E3C-4EAA-9588-CBCEDFA7A24B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48FEEEE5-8E3C-4EAA-9588-CBCEDFA7A24B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48FEEEE5-8E3C-4EAA-9588-CBCEDFA7A24B}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{48FEEEE5-8E3C-4EAA-9588-CBCEDFA7A24B}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{48FEEEE5-8E3C-4EAA-9588-CBCEDFA7A24B}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{48FEEEE5-8E3C-4EAA-9588-CBCEDFA7A24B}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{48FEEEE5-8E3C-4EAA-9588-CBCEDFA7A24B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48FEEEE5-8E3C-4EAA-9588-CBCEDFA7A24B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48FEEEE5-8E3C-4EAA-9588-CBCEDFA7A24B}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{48FEEEE5-8E3C-4EAA-9588-CBCEDFA7A24B}.Release|iPhone.Build.0 = Release|Any CPU
+		{48FEEEE5-8E3C-4EAA-9588-CBCEDFA7A24B}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{48FEEEE5-8E3C-4EAA-9588-CBCEDFA7A24B}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

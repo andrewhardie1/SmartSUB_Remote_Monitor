@@ -10,7 +10,7 @@ namespace SmartSUB_Remote_Monitor
     {
         public static string DatabaseLocation = string.Empty;
         public static MobileServiceClient client = new MobileServiceClient("https://smartsub-databaseconnapp.azurewebsites.net");
-        public static Users user = new Users();
+        public static UserVerificationViewModel user = new UserVerificationViewModel();
         //public static AlarmData alarmdata = new AlarmData();
         public static NotificationMessage notificationMessage = new NotificationMessage();
         public static int stationSelected;

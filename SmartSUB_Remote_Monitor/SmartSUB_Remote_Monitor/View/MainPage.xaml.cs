@@ -8,12 +8,14 @@ using Dms.Cms.SessionHandler.Stubs;
 using Dms.Cms.Messaging;
 using SmartSUB_Remote_Monitor.View;
 using Dms.Cms.SystemModel;
+using SmartSUB_Remote_Monitor.Model;
 
 namespace SmartSUB_Remote_Monitor
 {
     public partial class MainPage : ContentPage
     {
         public MainPageViewModel Model { get; set; } = new MainPageViewModel();
+        Model.UserVerificationViewModel user = new Model.UserVerificationViewModel();
 
         public MainPage()
         {
@@ -44,7 +46,15 @@ namespace SmartSUB_Remote_Monitor
                     Model.SystemInterface = connectionManager.SystemInterface;
                     App.SmartSUBServerURL = this.HostnameEntry.Text;
                     App.user.UserRole = this.GroupIDPicker.SelectedItem.ToString();
-                    await Navigation.PushAsync(new StationView(Model.SystemInterface));
+                    if (user.CheckUserExists(this.UserNameEntry.Text))
+                    {
+                        await Navigation.PushAsync(new UserVerificationView(Model.SystemInterface, this.UserNameEntry.Text));
+                    }
+                    else
+                    {
+                        await DisplayAlert("Error", "User does not exist - contact system admin.", "OK");
+                    }
+
                 }
             }
             catch

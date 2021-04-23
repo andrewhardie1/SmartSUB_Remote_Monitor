@@ -48,7 +48,7 @@ namespace SmartSUB_Remote_Monitor.Model
 
         ObservableCollection<Stations> stations = new ObservableCollection<Stations>();
 
-        public ref ObservableCollection<Stations> GetStations(SystemInterface systemInterface)
+        public ref ObservableCollection<Stations> GetStations(ISystemInterface systemInterface)
         {
             foreach (int station in GetDistinctStations(systemInterface))
             {
@@ -57,7 +57,7 @@ namespace SmartSUB_Remote_Monitor.Model
             return ref stations;
         }
 
-        public static List<int> GetDistinctStations(SystemInterface systemInterface)
+        public List<int> GetDistinctStations(ISystemInterface systemInterface)
         {
             List<int> stations = new List<int>();
 
@@ -71,15 +71,16 @@ namespace SmartSUB_Remote_Monitor.Model
             return stations;
         }
 
-        public void GetNumActiveAlarmsFromSmartSUB(SystemInterface systemInterface, ushort stationID)
+        public void GetNumActiveAlarmsFromSmartSUB(ISystemInterface systemInterface, ushort stationID)
         {
             SiteID siteID = new SiteID(stationID);
+
             DatabaseManagerStub databaseManager = new DatabaseManagerStub(systemInterface);
 
             databaseManager.GetActiveAlarms(siteID, (response, expected) => ExtractNumAlarms(response, expected, stationID, systemInterface));
         }
 
-        private void ExtractNumAlarms(QueryResult response, IEnumerable<AlarmRecord> expected, ushort stationID, SystemInterface systemInterface)
+        public void ExtractNumAlarms(QueryResult response, IEnumerable<AlarmRecord> expected, ushort stationID, ISystemInterface systemInterface)
         {
             int count = 0;
             DateTime latestActiveAlarm = new DateTime(1970, 01, 01);
@@ -125,6 +126,15 @@ namespace SmartSUB_Remote_Monitor.Model
                     });
                 }
             }
+        }
+
+        public bool UnitTestExample(String Expected)
+        {
+            if (Expected == "Bob")
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

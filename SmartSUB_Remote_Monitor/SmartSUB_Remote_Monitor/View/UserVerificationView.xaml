@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartSUB_Remote_Monitor.View.UserVerificationView"
+             Title="User Verification">
+    <ContentPage.Content>
+        <StackLayout x:Name="containerStackLayout"
+                 VerticalOptions="Center"
+                 Margin="20,0">
+
+            <ListView x:Name="userList" ItemsSource="{Binding Users, Mode=TwoWay}" HasUnevenRows="true" HeightRequest="200" SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout Spacing="5" Padding="20">
+                                    <Label Text="User:" FontSize="20" FontAttributes="Bold"/>
+                                    <Label Text="{Binding UserRole}" FontSize="20"/>
+                                    <Label Text=" " FontSize="20"/>
+                                    <Label Text="Security Verifiction Question:" FontSize="20" FontAttributes="Bold"/>
+                                    <Label Text="{Binding SecurityQuestion}" FontSize="20"/>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Entry x:Name="SecurityAnswerEntry"
+                                           Placeholder="Enter answer here"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Center"
+                                           Keyboard="Text"
+                                           Margin="0,0,0,0"/>
+            <Button x:Name="VerifyButton"
+                Margin="0,0,0,200"
+                Text="Verify Account"
+                BackgroundColor="#4da6ff"
+                TextColor="White"
+                Clicked="VerifyButton_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
