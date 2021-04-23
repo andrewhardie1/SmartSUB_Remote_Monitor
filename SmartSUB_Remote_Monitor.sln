@@ -10,6 +10,7 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartSUB_Remote_Monitor", "SmartSUB_Remote_Monitor\SmartSUB_Remote_Monitor\SmartSUB_Remote_Monitor.csproj", "{D0E269B6-585B-4523-839A-39907FDB7FDF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartSUB_Remote_Monitor.UnitTests", "SmartSUB_Remote_Monitor.UnitTests\SmartSUB_Remote_Monitor.UnitTests.csproj", "{48FEEEE5-8E3C-4EAA-9588-CBCEDFA7A24B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
